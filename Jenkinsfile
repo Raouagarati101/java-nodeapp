@@ -12,8 +12,8 @@ pipeline {
         }
 	     stage('Docker push image'){
             steps{
-		    withCredentials([string(credentialsId: 'DOCKER-HUB-CREDENTIALS', variable: 'DOCKER-HUB-CREDENTIALS')]) {
-			    sh "docker login -u raouagara -p ${DOCKER-HUB-CREDENTIALS}" 
+		    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
+			    sh "docker login -u raouagara -p ${DOCKER_HUB_CREDENTIALS}" 
 			    sh "docker push raouagara/java-nodeapp:${DOCKER_TAG}"
     }
 	    }
