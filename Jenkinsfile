@@ -10,7 +10,7 @@ pipeline {
                 sh "docker build . -t raouagara/java-nodeapp:${DOCKER_TAG}"
             }
         }
-	     stage('Docker push image '){
+	     stage('Docker push image'){
             steps{
 		    withCredentials([string(credentialsId: 'DOCKER-HUB-CREDENTIALS', variable: 'DOCKER-HUB-CREDENTIALS')]) {
 			    sh "docker login -u raouagara -p ${DOCKER-HUB-CREDENTIALS}" 
@@ -20,6 +20,6 @@ pipeline {
 	     }
     }
 	def getDockerTag(){
-		def tag= sh script 'git rev-parse HEAD', returnStdout: true
+		def tag= sh script: 'git rev-parse HEAD', returnStdout: true
 		return tag }
 }
