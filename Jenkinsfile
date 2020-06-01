@@ -18,7 +18,7 @@ pipeline {
     }
 	    }
 	     }
-    }
+   
 	stage('Deploy to k8s'){
 		steps{ 
 			sh "chmod+x changeTag.sh" 
