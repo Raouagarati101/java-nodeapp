@@ -23,8 +23,8 @@ pipeline {
 		steps{ 
 			sh "chmod+x changeTag.sh" 
 			sh "./changeTag.sh ${DOCKER_TAG}" 
-			sshagent{['kubernetes-master']} 
-			{ sh "scp -o StrictHostKeyCheking=no services.yml node-app-pod.yml root@192.168.1.12:/home/kubernetes-master/" 
+			sshagent(['kubernetes-master']) {
+				sh "scp -o StrictHostKeyCheking=no services.yml node-app-pod.yml root@192.168.1.12:/home/kubernetes-master/" 
 			 script{
 				 try{ 
 					 sh "ssh root@192.168.1.12 kubectl apply-f ." 
@@ -35,7 +35,7 @@ pipeline {
 			}
 		}
 	}
-}		      }
+}		     
 	def getDockerTag(){
 		def tag = sh script: 'git rev-parse HEAD', returnStdout: true
 		return tag }
