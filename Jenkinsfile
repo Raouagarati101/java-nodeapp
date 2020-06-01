@@ -28,14 +28,14 @@ pipeline {
 			 script{
 				 try{ 
 					 sh "ssh root@192.168.1.12 kubectl apply-f ." 
-				 }catch (error)
-				 { sh "ssh root@192.168.1.12 kubectl create-f ." 
+				 }catch (error){ 
+					 sh "ssh root@192.168.1.12 kubectl create-f ." 
 				 }
 			 }
 			}
 		}
 	}
-			      }
+}		      }
 	def getDockerTag(){
 		def tag = sh script: 'git rev-parse HEAD', returnStdout: true
 		return tag }
