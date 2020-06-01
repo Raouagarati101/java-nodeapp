@@ -23,7 +23,7 @@ pipeline {
             steps{
 		    sh "chmod+x changeTag.sh"
 		    sh "./changeTag.sh ${DOCKER_TAG}"
-		    sshagent{['kubernets-master'} {
+		    sshagent{['kubernetes-master']} {
 			      sh "scp -o StrictHostKeyCheking=no services.yml node-app-pod.yml root@192.168.1.12:/home/
 			      script{
 				      try{
