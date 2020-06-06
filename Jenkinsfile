@@ -24,7 +24,7 @@ pipeline {
 			sh "chmod +x changeTag.sh" 
 			sh "./changeTag.sh ${DOCKER_TAG}" 
 			sshagent(['kubernetes-master']) {
-				sh "scp -o StrictHostKeyChecking=no services.yaml node-app-pod.yaml root@192.168.1.30:/root/application/" 
+				sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.1.30:/root/application/" 
 			 script{
 				 try{ 
 					 sh "ssh root@192.168.1.30 kubectl apply -f ." 
