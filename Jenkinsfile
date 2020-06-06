@@ -36,6 +36,7 @@ pipeline {
 	//		 }
 	//		}
 	//	}
+          //    }
 	    stage('Deploy App') {
       steps {
         script {
@@ -43,8 +44,7 @@ pipeline {
         }
       }
       }
-	    }
-    }
+	    
 	}
 }
 def getDockerTag() {
