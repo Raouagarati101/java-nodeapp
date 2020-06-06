@@ -38,11 +38,19 @@ pipeline {
 	//	}
           //    }
 	    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "pods.yml", kubeconfigId : "mykubeconfig")
-        }
-      }
+     // steps {
+       // script {
+         // kubernetesDeploy(configs: "pods.yml", kubeconfigId : "mykubeconfig")
+        //}
+      //}
+               kubernetesDeploy(
+		       configs: 'pods.yml',
+		       kubeconfigID: 'KUBERNETES-CLUSTER-CONFIG',
+		       enableConfigSubstitution: true
+		       )
+	    }
+		       
+		    
       }
 	    
 	}
