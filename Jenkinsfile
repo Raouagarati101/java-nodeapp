@@ -19,23 +19,32 @@ pipeline {
 	    }
 	     }
    
-	stage('Deploy to k8s'){
-		steps{ 
-			sh "chmod +x changeTag.sh" 
-			sh "./changeTag.sh ${DOCKER_TAG}" 
-			sshagent(['kubernetes-master']) {
-				sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.1.30:/root/application/" 
-			 script{
-				 try{ 
-					 sh "kubectl apply -f services.yml ." 
-					 sh "kubectl apply -f node-apppod.yml ." 
-				 }catch (error){ 
-					 sh "kubectl create -f services.yml ." 
-					 sh "kubectl create -f node-apppod.yml ." 
-				 }
-			 }
-			}
-		}
+	//stage('Deploy to k8s'){
+	//	steps{ 
+	//		sh "chmod +x changeTag.sh" 
+	//		sh "./changeTag.sh ${DOCKER_TAG}" 
+	//		sshagent(['kubernetes-master']) {
+	//			sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.1.30:/root/application/" 
+	//		 script{
+	//			 try{ 
+	//				 sh "kubectl apply -f services.yml ." 
+	//				 sh "kubectl apply -f node-apppod.yml ." 
+	//			 }catch (error){ 
+	//				 sh "kubectl create -f services.yml ." 
+	//				 sh "kubectl create -f node-apppod.yml ." 
+	//			 }
+	//		 }
+	//		}
+	//	}
+	    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "pods.yml", kubeconfigId: "kubeconfig")
+        }
+      }
+      }
+	    }
+    }
 	}
 }
 }
