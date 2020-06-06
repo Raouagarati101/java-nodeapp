@@ -1,5 +1,5 @@
 ---
-apiVersion: apps/v1
+ apiVersion: apps/v1
 kind: Pod
 metadata:
   name: java-nodeapp
@@ -14,7 +14,7 @@ spec:
 
 ---
 kind: Service
-apiVersion: apps/v1
+ apiVersion: apps/v1
 metadata:
   name: java-nodeapp
 spec:
