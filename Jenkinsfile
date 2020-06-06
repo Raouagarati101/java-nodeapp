@@ -48,11 +48,7 @@ pipeline {
 		       kubeconfigID: 'KUBERNETES-CLUSTER-CONFIG',
 		       enableConfigSubstitution: true
 		       )
-	    }
-		       
-		    
-      }
-	    
+	    }    
 	}
     }
 def getDockerTag() {
