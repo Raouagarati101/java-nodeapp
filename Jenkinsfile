@@ -27,9 +27,9 @@ pipeline {
 				sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.1.30:/root/application/" 
 			 script{
 				 try{ 
-					 sh "ssh root@192.168.1.30 kubectl apply-f ." 
+					 sh "ssh root@192.168.1.30 kubectl apply -f ." 
 				 }catch (error){ 
-					 sh "ssh root@192.168.1.30 kubectl create-f ." 
+					 sh "ssh root@192.168.1.30 kubectl create -f ." 
 				 }
 			 }
 			}
