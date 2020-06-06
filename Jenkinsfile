@@ -37,7 +37,7 @@ pipeline {
 	//		}
 	//	}
           //    }
-	    stage('Deploy App') {
+	    stage("Deploy App in k82") {
      // steps {
        // script {
          // kubernetesDeploy(configs: "pods.yml", kubeconfigId : "mykubeconfig")
