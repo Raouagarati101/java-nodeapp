@@ -38,8 +38,8 @@ pipeline {
 	//	}
           //    }
 	    stage('Deploy App') {
-      steps {
-        script {
+     // steps {
+       // script {
          // kubernetesDeploy(configs: "pods.yml", kubeconfigId : "mykubeconfig")
         //}
       //}
