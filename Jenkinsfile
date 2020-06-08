@@ -45,7 +45,7 @@ pipeline {
       //}
                kubernetesDeploy(
 		       configs: 'pods.yml',
-		       kubeconfigId: 'KUBERNETES-CLUSTER-CONFIG',
+		       kubeconfigId: 'mykubeconfig',
 		       enableConfigSubstitution: true
 		       )
 	    }    
