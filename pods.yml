@@ -1,27 +1,15 @@
----
+--- 
 apiVersion: apps/v1
 kind: Pod
-metadata:
-  name: java-nodeapp
-  labels:
+metadata: 
+  labels: 
     app: java-nodeapp
-spec:
-  containers:
-    - name: java-nodeapp
-      image: raouagara/java-nodeapp:tagVersion
-      ports:
-        - containerPort: 8080
-
----
-kind: Service
-apiVersion: apps/v1
-metadata:
   name: java-nodeapp
-spec:
-  selector:
-    app: java-nodeapp
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
+spec: 
+  containers: 
+    - 
+      image: "raouagara/java-nodeapp:tagVersion"
+      name: java-nodeapp
+      ports: 
+        - 
+          containerPort: 8080
