@@ -1,15 +1,35 @@
---- 
-apiVersion: apps/v1
-kind: Pod
-metadata: 
-  labels: 
-    app: java-nodeapp
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: java-nodeapp
+  name: spring-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: springboot
+    spec:
+      containers:  
+      - image: rouagara/java-nodeapp:latest
+        name: java-nodeapp
+        ports:
+        - name: java-nodeapp
+          containerPort: 8080       
+---
+# Load Balancer Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: java-nodeapp
   name: java-nodeapp
-spec: 
-  containers: 
-    - 
-      image: "raouagara/java-nodeapp:tagVersion"
-      name: java-nodeapp
-      ports: 
-        - 
-          containerPort: 8080
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    name: java-nodeapp
+---
