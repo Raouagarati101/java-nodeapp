@@ -1,51 +1,28 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: flask
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: flask
-    spec:
-      containers:
-      - name: flask
-        image: mjhea0/flask-kubernetes:latest
-        ports:
-        - containerPort: 5000
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  labels:
-    name: java-nodeapp
-  name: spring-controller
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        name: springboot
-    spec:
-      containers:  
-      - image: raouagara/java-nodeapp:latest
-        name: java-nodeapp
-        ports:
-        - name: java-nodeapp
-          containerPort: 8080       
 ---
-# Load Balancer Service
 apiVersion: v1
-kind: Service
+kind: Pod
 metadata:
+  name: java-nodeapp
   labels:
-    name: java-nodeapp
+    app: java-nodeapp
+spec:
+  containers:
+    - name: nodeapp
+      image: raouagara/java-nodeapp:latest
+      ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
   name: java-nodeapp
 spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 8080
   selector:
-    name: java-nodeapp
+    app: java-nodeapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer   
 ---
+  
